@@ -5,11 +5,13 @@ std::tuple<int, int, int ,int> GCD(int f, int g)
 {
     int rLast = f;
     int sLast = 1;
-    int tLast = 1;
+    int tLast = 0;
 
     int r = g;
     int s = 0;
     int t = 1;
+
+    std::cout << "i: 0" << ", r: " << rLast << ", s: " << sLast << ", t: " << tLast << std::endl;
 
     int i = 1;
     while (r != 0)
@@ -19,15 +21,17 @@ std::tuple<int, int, int ,int> GCD(int f, int g)
         int tHelp = t;
 
         int q = rLast / r;
+        std::cout << "i: " << i << ", r: " << r << ", s: " << s << ", t: " << t << ", q: " << q << std::endl;
         r = rLast - q * r;
         s = sLast - q * s;
         t = tLast - q * t;
 
-        rLast = r;
-        sLast = s;
-        tLast = t;
+        rLast = rHelp;
+        sLast = sHelp;
+        tLast = tHelp;
         i++;
     }
+    std::cout << "i: " << i << ", r: " << r << ", s: " << s << ", t: " << t << std::endl;
     int l = i - 1;
 
     return std::make_tuple(l, r, s, t);
@@ -35,8 +39,8 @@ std::tuple<int, int, int ,int> GCD(int f, int g)
 
 auto main(int argc, char *argv[]) -> int {
 
-    int f = {1234};
-    int g = {12};
+    int f = {1234567};
+    int g = {123};
 
     std::cout << "f: " << f << std::endl;
     std::cout << "g: " << g << std::endl;
