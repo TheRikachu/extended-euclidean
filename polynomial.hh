@@ -10,17 +10,16 @@ class Polynomial {
         int modulus_;
 
     public:
+        Polynomial(int size, int modulus);
+
         Polynomial(std::vector<int> coeffs, int modulus);
 
         Polynomial(const Polynomial &that);
 
         ~Polynomial();
 
-        std::vector<int> GetCoeffs() const;
-
-        int GetModulus() const;
-
-        int GetDegree() const;
+        int &operator[](std::size_t idx);
+        const int &operator[](std::size_t idx) const;
 
         Polynomial &operator=(const Polynomial &that);
 
@@ -40,9 +39,16 @@ class Polynomial {
 
         friend Polynomial operator%(Polynomial lhs, const Polynomial &rhs);
 
-        int operator[](int i);
+        std::vector<int> GetCoeffs() const;
 
-        std::string ToString();
+        int GetModulus() const;
+
+        int GetDegree() const;
+
+        /* Leading Coefficient */
+        int LC() const;
+
+        std::string ToString() const;
 };
 
 #endif // POLYNOMIAL_H_
