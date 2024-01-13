@@ -61,26 +61,26 @@ std::string PolyString(std::vector<int> poly)
     return str;
 }
 
-/*std::tuple<int, int, int, int> GCD(std::vector<int> f, std::vector<int> g, int mod)
+std::tuple<int, int, int, int> GCD(std::vector<int> f, std::vector<int> g, int mod)
 {
-    auto rLast = f;
-    auto sLast = {1};
-    auto tLast = {0};
+    std::vector<int> rLast = f;
+    std::vector<int> sLast = {1};
+    std::vector<int> tLast = {0};
 
-    auto r = g;
-    auto s = {0};
-    auto t = {1};
+    std::vector<int> r = g;
+    std::vector<int> s = {0};
+    std::vector<int> t = {1};
 
     std::cout << "i: 0, r: " << PolyString(rLast) << ", s: " << PolyString(sLast) << ", t: " << PolyString(tLast) << std::endl;
 
     int i = 1;
     while (r != 0)
     {
-        int rHelp = r;
-        int sHelp = s;
-        int tHelp = t;
+        auto rHelp = r;
+        auto sHelp = s;
+        auto tHelp = t;
 
-        int q = rLast / r;
+        auto q = rLast / r;
         std::cout << "i: " << i << ", r: " << r << ", s: " << s << ", t: " << t << ", q: " << q << std::endl;
         r = rLast - q * r;
         s = sLast - q * s;
@@ -95,7 +95,7 @@ std::string PolyString(std::vector<int> poly)
     int l = i - 1;
 
     return std::make_tuple(0, 0, 0, 0);
-}*/
+}
 
 auto main(int argc, char *argv[]) -> int {
     std::cout << "::Integer GCD::" << std::endl;
