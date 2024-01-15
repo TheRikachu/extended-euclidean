@@ -27,6 +27,10 @@ class Polynomial {
 
         friend Polynomial operator+(Polynomial lhs, const Polynomial &rhs);
 
+        Polynomial &operator-=(const Polynomial &that);
+
+        friend Polynomial operator-(Polynomial lhs, const Polynomial &rhs);
+
         Polynomial &operator*=(const Polynomial &that);
 
         friend Polynomial operator*(Polynomial lhs, const Polynomial &rhs);

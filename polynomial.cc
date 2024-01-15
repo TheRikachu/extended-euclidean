@@ -102,8 +102,53 @@ Polynomial &Polynomial::operator/=(const Polynomial &that)
 
     while (r.GetDegree() >= bDegree)
     {
-       q[r.GetDegree() - bDegree] = q[r.GetDegree() - bDegree] + (/*(r.LC() * that.LC())*/ 1);
+        /* Create a polynomial x^{rDegree - bDegree} */
+        int rDegree = r.GetDegree();
+        Polynomial x = Polynomial(rDegree - bDegree, 2);
+        x[rDegree - bDegree] = 1;
+
+        /* Update quotient */
+        q[r.GetDegree() - bDegree] = q[r.GetDegree() - bDegree] + (/*(r.LC() * that.LC())*/ x[rDegree - bDegree]);
     }
+    this->coeffs_ = q.GetCoeffs();
+    return *this;
+}
+
+Polynomial operator/(Polynomial lhs, const Polynomial &rhs)
+{
+    lhs /= rhs;
+    return lhs;
+}
+
+Polynomial &Polynomial::operator%=(const Polynomial &that)
+{
+    if (this->modulus_ != that.GetModulus())
+    {
+        throw ("Cannot divide polynomial with different modulus");
+    }
+    int modulus = this->modulus_;
+    if (modulus != 2)
+    {
+        throw ("WIP Cannot divide polynomials with module other than 2");
+    }
+
+    auto r = *this;
+    auto b = that;
+    int bDegree = b.GetDegree(); /* Remain constant */
+
+    while (r.GetDegree() >= bDegree)
+    {
+        /* Create a polynomial x^{rDegree - bDegree} */
+        int rDegree = r.GetDegree();
+        Polynomial x = Polynomial(rDegree - bDegree, 2);
+        x[rDegree - bDegree] = 1;
+
+        /* Update remainder */
+        r[rDegree - bDegree] = r - (x * b);
+    }
+    this->coeffs_ = r.GetCoeffs();
+    return *this;
+
 }
 
 std::vector<int> Polynomial::GetCoeffs() const { return this->coeffs_; }
